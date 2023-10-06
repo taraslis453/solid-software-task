@@ -26,7 +26,7 @@ func NewUserStorage(postgresql *postgresql.PostgreSQLGorm) *userStorage {
 	return &userStorage{postgresql}
 }
 
-func (r *userStorage) GetUser(ctx context.Context, filter *service.GetUserFilter) (*entity.User, error) {
+func (r *userStorage) GetUser(ctx context.Context, filter service.GetUserFilter) (*entity.User, error) {
 	stmt := r.DB
 	if filter.EmailAddress != nil {
 		stmt = stmt.Where(entity.User{EmailAddress: *filter.EmailAddress})

@@ -39,7 +39,7 @@ func (s *userService) RegisterUser(ctx context.Context, opts RegisterUserOptions
 		With("opts", opts)
 
 	// Check if user with the same email already exists in storage and return error if exists
-	user, err := s.storages.User.GetUser(ctx, &GetUserFilter{
+	user, err := s.storages.User.GetUser(ctx, GetUserFilter{
 		EmailAddress: &opts.EmailAddress,
 	})
 	if err != nil {
@@ -79,7 +79,7 @@ func (s *userService) LoginUser(ctx context.Context, opts LoginUserOptions) (Log
 		WithContext(ctx).
 		With("opts", opts)
 
-	user, err := s.storages.User.GetUser(ctx, &GetUserFilter{
+	user, err := s.storages.User.GetUser(ctx, GetUserFilter{
 		EmailAddress: &opts.EmailAddress,
 	})
 	if err != nil {
@@ -126,7 +126,7 @@ func (s *userService) GetUser(ctx context.Context, opt GetUserOptions) (*entity.
 		Named("GetUser").
 		WithContext(ctx)
 
-	user, err := s.storages.User.GetUser(ctx, &GetUserFilter{
+	user, err := s.storages.User.GetUser(ctx, GetUserFilter{
 		ID:           &opt.ID,
 		EmailAddress: &opt.EmailAddress,
 	})
@@ -151,7 +151,7 @@ func (s *userService) UpdateUser(ctx context.Context, newUser *entity.User) (*en
 		With("newUser", newUser).
 		WithContext(ctx)
 
-	user, err := s.storages.User.GetUser(ctx, &GetUserFilter{
+	user, err := s.storages.User.GetUser(ctx, GetUserFilter{
 		ID: &newUser.ID,
 	})
 	if err != nil {
@@ -181,7 +181,7 @@ func (s *userService) DeleteUser(ctx context.Context, id string) error {
 		With("id", id).
 		WithContext(ctx)
 
-	user, err := s.storages.User.GetUser(ctx, &GetUserFilter{
+	user, err := s.storages.User.GetUser(ctx, GetUserFilter{
 		ID: &id,
 	})
 	if err != nil {
@@ -254,7 +254,7 @@ func (s *userService) VerifyUserToken(ctx context.Context, tokenStr string) (*en
 	}
 
 	// Get user from storage by token &claims.UserID
-	user, err := s.storages.User.GetUser(ctx, &GetUserFilter{ID: &claimsData.UserID})
+	user, err := s.storages.User.GetUser(ctx, GetUserFilter{ID: &claimsData.UserID})
 	if err != nil {
 		logger.Error("failed to get user", "err", err)
 		return nil, fmt.Errorf("failed to get user: %w", err)
