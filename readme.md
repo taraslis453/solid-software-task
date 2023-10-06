@@ -21,6 +21,8 @@ Clean architecture is a software design that helps maintain an organized codebas
 - `./storage`: The storage layer, responsible for performing CRUD operations on the data [low-level module].
 - `./controller`: The transport layer, responsible for obtaining input data, passing it to the business logic level, and returning the output result. Here you can find directories like `http`, `pubsub`, and `queue`, as these are all data exchange mechanisms [low-level module].
 
+![](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
+
 #### Run locally
 
 To run all necessary services you need to execute a command in the root folder:
