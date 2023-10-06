@@ -47,5 +47,22 @@ curl -X PUT $BASE_URL/users/ -H "Content-Type: application/json" -H "Authorizati
 }'
 
 echo -e "\n\n"
+
+# Invalid Token
+echo "Testing with Invalid Token..."
+curl -X GET $BASE_URL/users/$USER_ID -H "Authorization: Bearer InvalidTokenHere"
+echo -e "\n\n"
+
+# Invalid Password
+echo "Testing with Invalid Password..."
+curl -X GET "$BASE_URL/users/login?email=john.doe@example.com&password=wrongpassword"
+echo -e "\n\n"
+
+# User Not Found
+echo "Testing with Non-existent User..."
+NON_EXISTENT_USER_ID="3f096523-8969-4b8e-b48d-b99c1600de9d"
+curl -X GET $BASE_URL/users/$NON_EXISTENT_USER_ID -H "Authorization: Bearer $ACCESS_TOKEN"
+
+echo -e "\n\n"
 echo "Tests Completed!"
 
