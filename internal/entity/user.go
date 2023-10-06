@@ -14,7 +14,6 @@ type User struct {
 	Surname      string `json:"surname,omitempty"`
 	Phone        string `json:"phone,omitempty"`
 	EmailAddress string `json:"emailAddress,omitempty"`
-	RefreshToken string `json:"-"`
 	Password     string `json:"-"`
 
 	CreatedAt time.Time      `json:"createdAt,omitempty" gorm:"index"`
